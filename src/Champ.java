@@ -19,7 +19,6 @@ public class Champ {
 		return tabChamp;
 	}
 	public int[][] getTabChampNb() {
-		this.affNb();
 		return tabChampNb;
 	}
 	
@@ -72,7 +71,7 @@ public class Champ {
 				ligne += String.valueOf(tabChampNb[i][j]);
 			
 				}
-			//System.out.println(ligne);
+			System.out.println(ligne);
 			}
 			
 	}
@@ -99,14 +98,8 @@ public class Champ {
 		System.out.println("test");
 		this.tabChamp = new boolean [levelSizes[level.ordinal()]] [levelSizes[level.ordinal()]];
 		this.tabChampNb= new int [levelSizes[level.ordinal()]] [levelSizes[level.ordinal()]];
-		System.out.println("test0.1");
 		videMines();
 		placeMines(level);
-		System.out.println("test0.2");
-		affMines();
-		System.out.println("test0.3");
-		affNb();
-		System.out.println("test0.4");
 	}
 	
 	public void add1Flag() {

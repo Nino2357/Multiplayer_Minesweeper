@@ -22,7 +22,7 @@ public class Main extends JFrame {
 		setContentPane(gui);
 		pack();
 		setVisible(true);
-		
+		//setSize(1600,1000);
 	}
 	/**
 	 * 

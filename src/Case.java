@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  */
 public class Case extends JPanel implements MouseListener{
 	private static final int WIDTH_CASE = 50;
-	private static final int HEIGHT_CASE = 50;
+	private static final int HEIGHT_CASE = 20;
 	private boolean isMine;
 	private int nbMinesAround;
 	private boolean clicked;

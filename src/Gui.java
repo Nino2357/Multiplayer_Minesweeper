@@ -36,36 +36,45 @@ public class Gui extends JPanel implements ActionListener {
 	Gui(Main main) {
 		this.main = main;
 		
-
-		// create the panel for mines
+		init();
+		button();
+		menu();
+		score();
+		
+		
+		
+		
+		
+	    //setSize(1500,1000);
+	    setVisible(true);
+	}
+	
+	public void init() {
 		champ = main.getChamp();
 		dimTabX = champ.getDimX();
 		dimTabY = champ.getDimY();
 	
-		
 		ca = new Case[dimTabX][dimTabY];
 		
 	    minesPanel = new JPanel();
 	    minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
-	    
-	    reset();
-	 
-		//Disp Panel
 	    minesPanel.setVisible(true);
+	    
 	    minesPanel.setSize(800,500);
 	    add(minesPanel, BorderLayout.CENTER);
 	    
-	    //Buttons
-	    butQuit = new JButton("Quit");
+	    reset();
+	}
+	public void button() {
+		butQuit = new JButton("Quit");
 		add(butQuit, BorderLayout.SOUTH);
 		butQuit.addActionListener(this);
 		
 		butReset = new JButton("Reset");
 		add(butReset, BorderLayout.SOUTH);
 		butReset.addActionListener(this);
-				
-		
-		
+	}
+	public void menu() {
 		//Menu
 		JMenuBar menuBar = new JMenuBar();
 		
@@ -81,6 +90,7 @@ public class Gui extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("EASY");
 				champ.changeLvl(Level.EASY);
+				refreshGrid();
 			}
 		});
 		mEasy.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_E, ActionEvent.ALT_MASK));
@@ -90,24 +100,8 @@ public class Gui extends JPanel implements ActionListener {
 		mMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("MEDIUM");
-				System.out.print("Test0");
 				champ.changeLvl(Level.MEDIUM);
-				System.out.print("Test1");
-				dimTabX = champ.getDimX();
-				dimTabY = champ.getDimY();
-				minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
-				System.out.print("testA");
-				minesPanel.removeAll();
-				for (int i=0 ; i < dimTabX ; i++) {
-					for (int j=0; j < dimTabY; j++) {
-						ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
-						System.out.print("i");
-						minesPanel.add(ca[i][j]);
-					}
-				 }
-			    setVisible(true);
-				
-			    
+				refreshGrid();
 			}
 		});
 		mMedium.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_M, ActionEvent.ALT_MASK));
@@ -118,7 +112,7 @@ public class Gui extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("HARD");
 				champ.changeLvl(Level.HARD);
-				
+				refreshGrid();
 			}
 		});
 		mHard.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_H, ActionEvent.ALT_MASK));
@@ -134,21 +128,29 @@ public class Gui extends JPanel implements ActionListener {
 		});
 		mQuitter.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_Q, ActionEvent.ALT_MASK));
 		
-		
-		
-		//Score
+		main.setJMenuBar(menuBar);
+	}
+	public void refreshGrid() {
+		dimTabX = champ.getDimX();
+		dimTabY = champ.getDimY();
+		ca = new Case[dimTabX][dimTabY];
+		minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
+		minesPanel.removeAll();
+		for (int i=0 ; i < dimTabX ; i++) {
+			for (int j=0; j < dimTabY; j++) {
+				ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
+				minesPanel.add(ca[i][j]);
+			}
+		 }
+
+	    setVisible(true);
+	    reset();
+	}
+	public void score() {
 		JLabel score = new JLabel();
 		score.setText("Score :" + champ.getScore());
 		add(score, BorderLayout.WEST);
-		
-		main.setJMenuBar(menuBar);
-		
-		
-	    setSize(1000,700);
-	    setVisible(true);
 	}
-	
-
 	public void reset() {
 		champ.videMines();
 		champ.placeMines(Level.EASY);
