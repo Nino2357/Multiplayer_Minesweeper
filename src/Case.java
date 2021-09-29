@@ -17,6 +17,7 @@ public class Case extends JPanel implements MouseListener{
 	private boolean isMine;
 	private int nbMinesAround;
 	private boolean clicked;
+	private boolean flag;
 	private String text;
 
 	/**
@@ -27,34 +28,49 @@ public class Case extends JPanel implements MouseListener{
 		this.isMine = isMine;
 		this.nbMinesAround = nbMinesAround;
 		text = "";
+		flag = false;
+		clicked = false;
 		setPreferredSize(new Dimension(WIDTH_CASE, HEIGHT_CASE));
 		setBackground(Color.GRAY);
 		addMouseListener(this);
 	
 	}
+	public boolean getFlag() {
+		return this.flag;
+	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawString(String.valueOf(text), getWidth()/2, getHeight()/2);
+		g.drawRect(0,0, getWidth(), getHeight());
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1) {
             System.out.println("Left Click!");
-            setBackground(Color.CYAN);
+            
     		clicked = true;
-    		if(isMine) {
+    		if(isMine & !flag) {
     			text="X";
+    			setBackground(Color.CYAN);
     		}
-    		else {
+    		else if (!flag) {
     			text=String.valueOf(nbMinesAround);
+    			setBackground(Color.CYAN);
     		}
     		repaint();
          }
 		 if(e.getButton() == MouseEvent.BUTTON3) {
 			 System.out.println("Right Click!");
-			 setBackground(Color.RED);
+			 if (flag == false & clicked == false) {
+				 setBackground(Color.RED);
+				 flag = true;
+			 }
+			 else if (!clicked) {
+				 setBackground(Color.GRAY);
+				 flag = false;
+			 }
 			 
 	     }
 		

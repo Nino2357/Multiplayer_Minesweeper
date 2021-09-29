@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 
 /**
  * 
- * @author ninod
  *
  */
 
@@ -19,7 +18,7 @@ public class Main extends JFrame {
 		ch= new Champ(Level.EASY);
 		ch.placeMines(Level.EASY);
 		gui = new Gui(this);
-		// new testGrid();
+		
 		setContentPane(gui);
 		pack();
 		setVisible(true);

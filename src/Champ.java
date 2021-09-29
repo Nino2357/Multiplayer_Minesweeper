@@ -6,6 +6,7 @@ public class Champ {
 	private int [] levelNbMines = {10,40,90};
 	private boolean[][] tabChamp;
 	private int[][] tabChampNb;
+	private int score;
 	
 	Random alea = new Random() ;
 	
@@ -71,7 +72,7 @@ public class Champ {
 				ligne += String.valueOf(tabChampNb[i][j]);
 			
 				}
-			System.out.println(ligne);
+			//System.out.println(ligne);
 			}
 			
 	}
@@ -91,5 +92,33 @@ public class Champ {
 				this.tabChampNb[i][j]=testM(i-1,j-1)+testM(i-1,j)+testM(i-1,j+1)+testM(i,j-1)+testM(i,j+1)+testM(i+1,j-1)+testM(i+1,j)+testM(i+1,j+1);	
 			}
 		}
+	}
+	
+	
+	public void changeLvl(Level level) {
+		System.out.println("test");
+		this.tabChamp = new boolean [levelSizes[level.ordinal()]] [levelSizes[level.ordinal()]];
+		this.tabChampNb= new int [levelSizes[level.ordinal()]] [levelSizes[level.ordinal()]];
+		System.out.println("test0.1");
+		videMines();
+		placeMines(level);
+		System.out.println("test0.2");
+		affMines();
+		System.out.println("test0.3");
+		affNb();
+		System.out.println("test0.4");
+	}
+	
+	public void add1Flag() {
+		this.score ++;
+	}
+	public void rem1Flag() {
+		this.score --;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public int getScore() {
+		return this.score;
 	}
 }
