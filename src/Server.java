@@ -1,32 +1,34 @@
 import java.net.*;
+import java.util.ArrayList;
 import java.io.*;
 
 
 public class Server implements Runnable {
 	
+	private ArrayList<Thread> tabThread;
+	private ArrayList<Socket> socket;
+	private int nbjoueur;
+	private ServerSocket gestSock;
+	
 	public Server() {
 		System.out.println("in Server");
 		try {
-			ServerSocket gestSock = new ServerSocket(10000);
-			System.out.println("before accept");
-			Socket socket= gestSock.accept();
-			System.out.println("after accept");
-			
-			DataInputStream entree = new DataInputStream(socket.getInputStream()); 
-		    DataOutputStream sortie = new DataOutputStream(socket.getOutputStream()); 
-		
-		    // lecture d’une donnée  
-		    String nomJoueur = entree.readUTF() ;  
-		    System.out.println(nomJoueur+"connected");
-		     
-		    // envoi d ’une donnée : 0 par exemple 
-		    sortie.writeInt(0);  
-		    // un peu de ménage 
-		    sortie.close() ; 
-		  	entree.close() ; 
-		    socket.close();  
-		    gestSock.close() ; 
-		 } catch (IOException e) {e.printStackTrace( );} 
+			nbjoueur=0;
+			gestSock = new ServerSocket(10000);
+			while(true) {
+				System.out.println("before accept"+nbjoueur);;
+				Socket gs = gestSock.accept();
+				System.out.println(gs);
+				socket.add(gs);
+				tabThread.add(new Thread(this));
+				System.out.println("nbjoueur");
+				tabThread.get(nbjoueur).start();
+				
+				nbjoueur ++; 
+				System.out.println("after accept");
+		}
+		//gestSock.close();
+		} catch (IOException e) {e.printStackTrace( );} 
 	}
 	
 	
@@ -36,11 +38,19 @@ public class Server implements Runnable {
 		new Server();
 	}
 	
-	
 	@Override
 	public void run() {
 		System.out.println("run");
-		// TODO Auto-generated method stub
+		try {
+			DataInputStream entree = new DataInputStream(socket.get(nbjoueur).getInputStream());
+			DataOutputStream sortie = new DataOutputStream(socket.get(nbjoueur).getOutputStream());
+			/*String nomJoueur = entree.readUTF();*/
+			/*System.out.println(nomJoueur+"connected");*/
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 		
 	}
 	

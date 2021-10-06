@@ -11,11 +11,11 @@ public class Client {
 		     
 		     out.writeUTF("Gros Bill"); 
 		     
-		     int numJoueur = in.readInt(); 
+		     /*int numJoueur = in.readInt(); 
 		     System.out.println("Joueur n°:"+numJoueur); 
-		     in.close(); 
+		    /* in.close(); 
 		     out.close();  
-		     sock.close() ;  
+		     sock.close() ;  */
 		 } catch (UnknownHostException e) {System.out.println("R2D2 est inconnue");} 
 		 catch (IOException e) {e.printStackTrace();} 
 		 }
