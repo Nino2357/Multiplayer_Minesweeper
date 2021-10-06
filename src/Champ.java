@@ -37,7 +37,7 @@ public class Champ {
 		}
 	}
 	
-	public void placeMines(Level level ) {
+	public void placeMines(Level level) {
 		for (int i= levelNbMines[level.ordinal()]; i != 0;) {   
 			int x = alea.nextInt(tabChamp.length) ; // tirage au sort nb ∈ [0,DIM-1]  
 			int y = alea.nextInt(tabChamp[0].length) ; // tirage au sort nb ∈ [0,DIM-1]
@@ -98,8 +98,6 @@ public class Champ {
 		System.out.println("test");
 		this.tabChamp = new boolean [levelSizes[level.ordinal()]] [levelSizes[level.ordinal()]];
 		this.tabChampNb= new int [levelSizes[level.ordinal()]] [levelSizes[level.ordinal()]];
-		videMines();
-		placeMines(level);
 	}
 	
 	public void add1Flag() {

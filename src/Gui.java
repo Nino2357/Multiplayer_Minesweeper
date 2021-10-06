@@ -30,6 +30,7 @@ public class Gui extends JPanel implements ActionListener {
 	private JPanel minesPanel;
 	private Case ca[][];
 	private JMenuItem mQuitter;
+	private Level currentLevel;
 	/**
 	 * 
 	 */
@@ -50,6 +51,7 @@ public class Gui extends JPanel implements ActionListener {
 	}
 	
 	public void init() {
+		currentLevel = Level.EASY;
 		champ = main.getChamp();
 		dimTabX = champ.getDimX();
 		dimTabY = champ.getDimY();
@@ -63,7 +65,7 @@ public class Gui extends JPanel implements ActionListener {
 	    minesPanel.setSize(800,500);
 	    add(minesPanel, BorderLayout.CENTER);
 	    
-	    reset();
+	    reset(currentLevel);
 	}
 	public void button() {
 		butQuit = new JButton("Quit");
@@ -91,6 +93,7 @@ public class Gui extends JPanel implements ActionListener {
 				System.out.println("EASY");
 				champ.changeLvl(Level.EASY);
 				refreshGrid();
+				reset(Level.EASY);
 			}
 		});
 		mEasy.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_E, ActionEvent.ALT_MASK));
@@ -102,6 +105,7 @@ public class Gui extends JPanel implements ActionListener {
 				System.out.println("MEDIUM");
 				champ.changeLvl(Level.MEDIUM);
 				refreshGrid();
+				reset(Level.MEDIUM);
 			}
 		});
 		mMedium.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_M, ActionEvent.ALT_MASK));
@@ -113,6 +117,7 @@ public class Gui extends JPanel implements ActionListener {
 				System.out.println("HARD");
 				champ.changeLvl(Level.HARD);
 				refreshGrid();
+				reset(Level.HARD);
 			}
 		});
 		mHard.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_H, ActionEvent.ALT_MASK));
@@ -144,16 +149,16 @@ public class Gui extends JPanel implements ActionListener {
 		 }
 
 	    setVisible(true);
-	    reset();
 	}
 	public void score() {
 		JLabel score = new JLabel();
 		score.setText("Score :" + champ.getScore());
 		add(score, BorderLayout.WEST);
 	}
-	public void reset() {
+	public void reset(Level level) {
 		champ.videMines();
-		champ.placeMines(Level.EASY);
+		champ.placeMines(level);
+		champ.calculNb();
 		minesPanel.removeAll();
 		for (int i=0 ; i < dimTabX ; i++) {
 			for (int j=0; j < dimTabY; j++) {
@@ -173,7 +178,7 @@ public class Gui extends JPanel implements ActionListener {
 		}
 		if(e.getSource() == butReset) {
 			System.out.println("reset");
-			reset();
+			reset(currentLevel);
 		}
 	}
 	public void comptFlag() {
