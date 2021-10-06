@@ -1,9 +1,11 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -31,6 +33,7 @@ public class Gui extends JPanel implements ActionListener {
 	private Case ca[][];
 	private JMenuItem mQuitter;
 	private Level currentLevel;
+	JLabel score = new JLabel();
 	/**
 	 * 
 	 */
@@ -40,7 +43,7 @@ public class Gui extends JPanel implements ActionListener {
 		init();
 		button();
 		menu();
-		score();
+		initScore();
 		
 		
 		
@@ -150,11 +153,11 @@ public class Gui extends JPanel implements ActionListener {
 
 	    setVisible(true);
 	}
-	public void score() {
-		JLabel score = new JLabel();
-		score.setText("Score :" + champ.getScore());
+	public void initScore() {
+		score.setText("Score : Start" + champ.getScore());
 		add(score, BorderLayout.WEST);
 	}
+
 	public void reset(Level level) {
 		champ.videMines();
 		champ.placeMines(level);
@@ -166,6 +169,7 @@ public class Gui extends JPanel implements ActionListener {
 				minesPanel.add(ca[i][j]);
 			}
 		 }
+		currentLevel=level;
 	    main.setContentPane(this);
 	    main.setVisible(true);
 	}
@@ -179,8 +183,13 @@ public class Gui extends JPanel implements ActionListener {
 		if(e.getSource() == butReset) {
 			System.out.println("reset");
 			reset(currentLevel);
-		}
+		}/*
+		if(e.getSource()== butScore) {
+			System.out.println("score");
+			updScore();
+		}*/
 	}
+
 	public void comptFlag() {
 		champ.setScore(0);
 		for (int i=0 ; i < dimTabX ; i++) {

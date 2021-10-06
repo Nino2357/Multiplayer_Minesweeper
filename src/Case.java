@@ -66,6 +66,7 @@ public class Case extends JPanel implements MouseListener{
 			 if (flag == false & clicked == false) {
 				 setBackground(Color.RED);
 				 flag = true;
+				 System.out.println(flag);
 			 }
 			 else if (!clicked) {
 				 setBackground(Color.GRAY);
