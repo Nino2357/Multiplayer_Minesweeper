@@ -1,30 +1,9 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-/**
- * 
- *
- */
-
-public class Main extends JFrame {
+public class Main {
 	
-	private Gui gui;
 	private Champ ch;
 
-	Main() {/*
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setTitle("Demineur");
-		ch= new Champ(Level.EASY);
-		ch.placeMines(Level.EASY);
-		gui = new Gui(this);
-		
-		setContentPane(gui);
-		pack();
-		setVisible(true);
-		//setSize(1600,1000);
-		 * 
-		 */
+	Main() {
 		System.out.println("main");
 		Client Client1 = new Client();
 		Client1.connectToServer();
@@ -38,13 +17,8 @@ public class Main extends JFrame {
 		Client3.connectToServer();
 		System.out.println("after Client");
 	}
-	/**
-	 * 
-	 */
+
 	public static void main(String[] args) {
 		new Main();
-	}
-	Champ getChamp() {
-		return ch;
 	}
 }

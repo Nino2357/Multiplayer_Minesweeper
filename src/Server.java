@@ -49,7 +49,6 @@ public class Server implements Runnable {
 			System.out.println(nomJoueur);
 			sortie.get(numJoueur).writeUTF("bienvenue"+nomJoueur+"vous etes le joueur num"+numJoueur);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 	}
