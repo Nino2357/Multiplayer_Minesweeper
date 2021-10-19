@@ -31,11 +31,11 @@ public class Main extends JFrame {
 		System.out.println("after Client");
 		System.out.println("main");
 		Client Client2 = new Client();
-		Client1.connectToServer();
+		Client2.connectToServer();
 		System.out.println("after Client");
 		System.out.println("main");
 		Client Client3= new Client();
-		Client1.connectToServer();
+		Client3.connectToServer();
 		System.out.println("after Client");
 	}
 	/**
