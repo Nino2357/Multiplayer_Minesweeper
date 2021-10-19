@@ -61,12 +61,9 @@ public class Server implements Runnable {
 	
 	@Override
 	public void run() {
-
 		System.out.println("run"+numJoueur);
 		System.out.println(numJoueur); 
 		initCom(numJoueur);
-		
 	}
-	
 }
 ;

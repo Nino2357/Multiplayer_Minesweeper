@@ -20,7 +20,7 @@ import javax.swing.KeyStroke;
 
 public class Gui extends JPanel implements ActionListener {
 	
-	private Main main;
+	private MainGame main;
 	private JButton butQuit;
 	private JButton butReset;
 	private JMenuItem mEasy;
@@ -37,8 +37,8 @@ public class Gui extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
-	Gui(Main main) {
-		this.main = main;
+	Gui(MainGame mainGame) {
+		this.main = mainGame;
 		
 		init();
 		button();
