@@ -76,6 +76,7 @@ public class GuiClient extends JPanel implements ActionListener {
 		JMenu menuNiveau = new JMenu("Niveau");
 		menuBar.add(menuNiveau);
 		
+		
 		JMenuItem mEasy = new JMenuItem("EASY");
 		menuNiveau.add(mEasy);
 		mEasy.addActionListener(new ActionListener() {
@@ -119,8 +120,41 @@ public class GuiClient extends JPanel implements ActionListener {
 		});
 		mQuitter.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_Q, ActionEvent.ALT_MASK));
 		
+		//Reset
+		JMenuItem mReset = new JMenuItem("Reset");
+		menuPartie.add(mReset);
+		mReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("reset");
+			}
+		});
+		mReset.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_R, ActionEvent.ALT_MASK));
+		
+		JMenu menuMode = new JMenu("Mode");
+		menuBar.add(menuMode);
+		
+		//Solo
+		JMenuItem mSolo = new JMenuItem("Solo");
+		menuMode.add(mSolo);
+		mSolo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("solo");
+			}
+		});
+		mSolo.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_S, ActionEvent.ALT_MASK));
+				
+		//Mutli
+		JMenuItem mMulti = new JMenuItem("Multiplayer");
+		menuMode.add(mMulti);
+		mMulti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("multi");
+			}
+		});
+		mMulti.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_C, ActionEvent.ALT_MASK));
+	
+		
 		cli.setJMenuBar(menuBar);
-
 	    cli.setContentPane(this);
 	    cli.pack();
 	    cli.setVisible(true);

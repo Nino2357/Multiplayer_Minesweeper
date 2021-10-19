@@ -46,10 +46,24 @@ public class Case extends JPanel implements MouseListener{
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {		
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
 		if(e.getButton() == MouseEvent.BUTTON1) {
             System.out.println("Left Click!");
-            
+              
     		clicked = true;
     		if(isMine & !flag) {
     			text="X";
@@ -74,21 +88,6 @@ public class Case extends JPanel implements MouseListener{
 			 }
 			 
 	     }
-		
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
