@@ -1,16 +1,9 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -18,58 +11,49 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-public class Gui extends JPanel implements ActionListener {
+public class GuiClient extends JPanel implements ActionListener {
 	
-	private MainGame main;
 	private JButton butQuit;
 	private JButton butReset;
-	private JMenuItem mEasy;
-	private JMenuItem mMedium;
-	private JMenuItem mHard;
-	private int dimTabX;
-	private int dimTabY;
-	private Champ champ;
-	private JPanel minesPanel;
+	private int dimTabX = 10;
+	private int dimTabY = 10;
 	private Case ca[][];
+	private Client cli;
+	private JPanel minesPanel;
 	private JMenuItem mQuitter;
-	private Level currentLevel;
 	JLabel score = new JLabel();
 	/**
 	 * 
 	 */
-	Gui(MainGame mainGame) {
-		this.main = mainGame;
-		
+	GuiClient(Client cli) {
+		this.cli = cli;
 		init();
 		button();
 		menu();
-		initScore();
-		
-		
-		
-		
-		
+//		initScore();
 	    //setSize(1500,1000);
 	    setVisible(true);
 	}
 	
-	public void init() {
-		currentLevel = Level.EASY;
-		champ = main.getChamp();
-		dimTabX = champ.getDimX();
-		dimTabY = champ.getDimY();
+	public void setDim(int dimX,int dimY)
+	{
+		dimTabX = dimX;
+		dimTabY = dimY;
+	}
 	
-		ca = new Case[dimTabX][dimTabY];
-		
+	public void init() {
 	    minesPanel = new JPanel();
 	    minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
 	    minesPanel.setVisible(true);
-	    
 	    minesPanel.setSize(800,500);
-	    add(minesPanel, BorderLayout.CENTER);
-	    
-	    reset(currentLevel);
+	    ca = new Case[dimTabX][dimTabY];
+	    add(minesPanel, BorderLayout.CENTER); 
+	    reset();
+	    cli.setContentPane(this);
+	    cli.pack();
+	    cli.setVisible(true);
 	}
+	
 	public void button() {
 		butQuit = new JButton("Quit");
 		add(butQuit, BorderLayout.SOUTH);
@@ -78,6 +62,9 @@ public class Gui extends JPanel implements ActionListener {
 		butReset = new JButton("Reset");
 		add(butReset, BorderLayout.SOUTH);
 		butReset.addActionListener(this);
+	    cli.setContentPane(this);
+	    cli.pack();
+	    cli.setVisible(true);
 	}
 	public void menu() {
 		//Menu
@@ -94,11 +81,8 @@ public class Gui extends JPanel implements ActionListener {
 		mEasy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("EASY");
-				champ.changeLvl(Level.EASY);
 				refreshGrid();
-				reset(Level.EASY);
 			}
-		
 		});
 		mEasy.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		
@@ -107,9 +91,8 @@ public class Gui extends JPanel implements ActionListener {
 		mMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("MEDIUM");
-				champ.changeLvl(Level.MEDIUM);
 				refreshGrid();
-				reset(Level.MEDIUM);
+				reset();
 			}
 		});
 		mMedium.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_M, ActionEvent.ALT_MASK));
@@ -119,9 +102,8 @@ public class Gui extends JPanel implements ActionListener {
 		mHard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("HARD");
-				champ.changeLvl(Level.HARD);
 				refreshGrid();
-				reset(Level.HARD);
+				reset();
 			}
 		});
 		mHard.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_H, ActionEvent.ALT_MASK));
@@ -137,42 +119,31 @@ public class Gui extends JPanel implements ActionListener {
 		});
 		mQuitter.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_Q, ActionEvent.ALT_MASK));
 		
-		main.setJMenuBar(menuBar);
+		cli.setJMenuBar(menuBar);
+
+	    cli.setContentPane(this);
+	    cli.pack();
+	    cli.setVisible(true);
 	}
 	public void refreshGrid() {
-		dimTabX = champ.getDimX();
-		dimTabY = champ.getDimY();
 		ca = new Case[dimTabX][dimTabY];
 		minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
 		minesPanel.removeAll();
-		for (int i=0 ; i < dimTabX ; i++) {
-			for (int j=0; j < dimTabY; j++) {
-				ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
-				minesPanel.add(ca[i][j]);
-			}
-		 }
-
 	    setVisible(true);
 	}
 	public void initScore() {
-		score.setText("Score : Start" + champ.getScore());
+		score.setText("Score : Start");
 		add(score, BorderLayout.WEST);
 	}
 
-	public void reset(Level level) {
-		champ.videMines();
-		champ.placeMines(level);
-		champ.calculNb();
+	public void reset() {
 		minesPanel.removeAll();
 		for (int i=0 ; i < dimTabX ; i++) {
 			for (int j=0; j < dimTabY; j++) {
-				ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
+				ca[i][j]= new Case(true,0);
 				minesPanel.add(ca[i][j]);
 			}
 		 }
-		currentLevel=level;
-	    main.setContentPane(this);
-	    main.setVisible(true);
 	} 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -183,56 +154,12 @@ public class Gui extends JPanel implements ActionListener {
 		}
 		if(e.getSource() == butReset) {
 			System.out.println("reset");
-			reset(currentLevel);
-		}/*
-		if(e.getSource()== butScore) {
-			System.out.println("score");
-			updScore();
-		}*/
+			reset();
+		}
 	}
-
 	public void comptFlag() {
-		champ.setScore(0);
-		for (int i=0 ; i < dimTabX ; i++) {
-			for (int j=0; j < dimTabY; j++) {
-				if (ca[i][j].getFlag() == true);
-					champ.add1Flag();
-			}
-		 }
-		
+
 	}
 }
 
 
-
-
-/*
-public void Reset2() {
-	champ.videMines();
-	champ.placeMines(Level.EASY);
-	minesPanel.removeAll();
-	for (int i=0 ; i < dimTabX ; i++) {
-		for (int j=0; j < dimTabY; j++) {
-			if (champ.getTabChamp()[i][j]==true) {
-				minesPanel.add(new JLabel((Icon) new ImageIcon(new ImageIcon(getClass().getResource("/mine.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))));
-			}
-			else {
-				minesPanel.add(new JLabel((Icon) new ImageIcon(new ImageIcon(getClass().getResource("/icon.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))));
-			}		
-		}
-	 }
-    main.setContentPane(this);
-    main.setVisible(true);
-}*/
-
-
-/*
-//NivEasy
-JMenuItem mNivEasy = new JMenuItem("Easy",KeyEvent.VK_E);
-menuPartie.add(mQuitter);
-mQuitter.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("quit");
-		System.exit(0);
-		}
-});*/

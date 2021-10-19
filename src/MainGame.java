@@ -18,7 +18,7 @@ public class MainGame extends JFrame {
 		ch= new Champ(Level.EASY);
 		ch.placeMines(Level.EASY);
 		gui = new Gui(this);
-		
+
 		setContentPane(gui);
 		pack();
 		setVisible(true);
