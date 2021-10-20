@@ -130,6 +130,16 @@ public class GuiClient extends JPanel implements ActionListener {
 		});
 		mReset.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_R, ActionEvent.ALT_MASK));
 		
+		//Result
+		JMenuItem mResult = new JMenuItem("Result");
+		menuPartie.add(mResult);
+		mResult.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("result");
+			}
+		});
+		mResult.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_L, ActionEvent.ALT_MASK));
+		
 		JMenu menuMode = new JMenu("Mode");
 		menuBar.add(menuMode);
 		
@@ -168,6 +178,13 @@ public class GuiClient extends JPanel implements ActionListener {
 	public void initScore() {
 		score.setText("Score : Start");
 		add(score, BorderLayout.WEST);
+	}
+	
+	public int getCaseValue() {
+		return cli.getCaseValue();
+	}
+	public int getCaseColor() {
+		return 0;
 	}
 
 	public void reset() {

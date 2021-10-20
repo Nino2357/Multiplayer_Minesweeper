@@ -13,6 +13,7 @@ public class Server implements Runnable {
 	private ServerSocket gestSock;
 	private int numJoueur;
 	private Champ champ;
+	private boolean play = true;
 	
 	public Server() {
 		initChamp();
@@ -52,12 +53,6 @@ public class Server implements Runnable {
 		} 
 	}
 	
-	public void StringtoAll(String s) {
-		for(int i=0;i<nbjoueur;i++) {
-			StringtoP(s,i);
-		}
-	}
-	
 	public void StringtoP(String s,int p) {
 		try {
 			sortie.get(p).writeUTF(s);
@@ -67,11 +62,7 @@ public class Server implements Runnable {
 		}
 	}
 	
-	public void InttoAll(int n) {
-		for(int i=0;i<nbjoueur;i++) {
-			InttoP(n,i);
-		}
-	}
+
 	public void InttoP(int n,int p) {
 		try {
 			sortie.get(p).writeInt(n);
@@ -80,7 +71,15 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+	public int IntfromP(int p) {
+		try {			
+			return entree.get(p).readInt();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
 	public static void main(String[] args) {
 		new Server();
 	}
@@ -99,11 +98,45 @@ public class Server implements Runnable {
 		System.out.println("num thread : " + numThread);
 		initCom(numThread);
 		initGame(numThread);
+		InttoP(10,numThread); //10 debut de partie
+		int choix = -1;
+		
+		while(play) {
+			choix = IntfromP(numThread);
+			switch(choix) {
+				case 0:
+					System.out.println("error");
+				case 1:
+					System.out.println("sortie");
+					play=false;
+					break;
+				default:
+					//System.out.println("rien");
+			}
+			choix=-1;
+				
+			
+		}
 		
 	}
 	public void initGame(int p) {
 		//Envoi de la taille de la grille
-		InttoP(10,p);
-		InttoP(10,p);
+		InttoP(champ.getDimX(),p);
+		InttoP(champ.getDimY(),p);
+		System.out.println("Debut partie joueur : " + p);
+		sendField(p);
 	}
+	public void sendField(int p) { //to disp result
+		for(int i=0; i<champ.getDimX();i++) {
+			for(int j=0;j<champ.getDimY();j++) {
+				if(champ.getTabChamp()[i][j]) {
+					InttoP(-1,p);
+				}
+				else {
+					InttoP(champ.getTabChampNb()[i][j],p);
+				}
+			}
+		}
+	}
+	
 }

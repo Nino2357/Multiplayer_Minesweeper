@@ -89,16 +89,14 @@ public class Gui extends JPanel implements ActionListener {
 		JMenu menuNiveau = new JMenu("Niveau");
 		menuBar.add(menuNiveau);
 		
+		
 		JMenuItem mEasy = new JMenuItem("EASY");
 		menuNiveau.add(mEasy);
 		mEasy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("EASY");
-				champ.changeLvl(Level.EASY);
 				refreshGrid();
-				reset(Level.EASY);
 			}
-		
 		});
 		mEasy.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		
@@ -107,9 +105,8 @@ public class Gui extends JPanel implements ActionListener {
 		mMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("MEDIUM");
-				champ.changeLvl(Level.MEDIUM);
 				refreshGrid();
-				reset(Level.MEDIUM);
+				reset(Level.EASY);
 			}
 		});
 		mMedium.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_M, ActionEvent.ALT_MASK));
@@ -119,9 +116,8 @@ public class Gui extends JPanel implements ActionListener {
 		mHard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("HARD");
-				champ.changeLvl(Level.HARD);
 				refreshGrid();
-				reset(Level.HARD);
+				reset(Level.EASY);
 			}
 		});
 		mHard.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_H, ActionEvent.ALT_MASK));
@@ -136,6 +132,52 @@ public class Gui extends JPanel implements ActionListener {
 			}
 		});
 		mQuitter.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_Q, ActionEvent.ALT_MASK));
+		
+		//Reset
+		JMenuItem mReset = new JMenuItem("Reset");
+		menuPartie.add(mReset);
+		mReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("reset");
+			}
+		});
+		mReset.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_R, ActionEvent.ALT_MASK));
+		
+		//Result
+		JMenuItem mResult = new JMenuItem("Result");
+		menuPartie.add(mResult);
+		mResult.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("result");
+			}
+		});
+		mResult.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_L, ActionEvent.ALT_MASK));
+		
+		JMenu menuMode = new JMenu("Mode");
+		menuBar.add(menuMode);
+		
+		//Solo
+		JMenuItem mSolo = new JMenuItem("Solo");
+		menuMode.add(mSolo);
+		mSolo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("solo");
+			}
+		});
+		mSolo.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_S, ActionEvent.ALT_MASK));
+				
+		//Mutli
+		JMenuItem mMulti = new JMenuItem("Multiplayer");
+		menuMode.add(mMulti);
+		mMulti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("multi");
+				System.exit(0);
+				//cli.start
+			}
+		});
+		mMulti.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_C, ActionEvent.ALT_MASK));
+	
 		
 		main.setJMenuBar(menuBar);
 	}
