@@ -39,6 +39,10 @@ public class GuiClient extends JPanel implements ActionListener {
 		ca[x][y].markFlag(p);
 		refreshGrid();
 	}
+	public void removeFlag(int x, int y) {
+		ca[x][y].removeFlag();
+		refreshGrid();
+	}
 	
 	public void setDim(int dimX,int dimY)
 	{
@@ -223,6 +227,8 @@ public class GuiClient extends JPanel implements ActionListener {
 	    cli.pack();
 	    cli.setVisible(true);
 	}
+
+
 }
 
 

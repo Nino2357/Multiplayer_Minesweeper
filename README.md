@@ -6,6 +6,7 @@ Discover =
 0 : nothing 
 1 : open case
 2 : mark flag
+3 : remove case
 
 
 Communication between client and server : 

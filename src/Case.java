@@ -69,6 +69,12 @@ public class Case extends JPanel implements MouseListener{
 				setBackground(Color.PINK);
 			}
 	}
+	public void removeFlag() {
+		flag = false;
+		System.out.println("Remove flag");
+		this.remove(label);
+		setBackground(Color.GRAY);
+	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -77,19 +83,6 @@ public class Case extends JPanel implements MouseListener{
 		g.drawRect(0,0, getWidth(), getHeight());
 	}
 	
-	@Override
-	public void mouseClicked(MouseEvent e) {		
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -110,14 +103,11 @@ public class Case extends JPanel implements MouseListener{
 		 if(e.getButton() == MouseEvent.BUTTON3) {
 			
 			 System.out.println("Right Click!");
-			 if (flag == false & clicked == false) {
-//				 setBackground(Color.RED);
-//				 flag = true;
+			 if (flag == false) { //put flag
 				 gui.CasePickGui(coordX, coordY, 2);//send flag to others 
-				 System.out.println(flag);
 			 }
-			 else if (!clicked) {
-				 setBackground(Color.GRAY);
+			 else { //remove flag
+				 gui.CasePickGui(coordX, coordY, 3);
 				 flag = false;
 			 }
 			 
@@ -126,6 +116,21 @@ public class Case extends JPanel implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

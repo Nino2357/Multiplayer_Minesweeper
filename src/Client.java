@@ -74,6 +74,9 @@ public class Client extends JFrame implements Runnable{
 		if (msgR==2010) { //flag
 			gui.markFlag(x,y,p);
 		}
+		if (msgR==2013) { //flag
+			gui.removeFlag(x,y);
+		}
 		
 	}
 	public void initClient() {

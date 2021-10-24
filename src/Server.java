@@ -154,6 +154,10 @@ public class Server implements Runnable {
 				InttoP(2010,p);
 				InttoP(0,p);
 			}
+			else if(discov==3) { //if remove flag
+				InttoP(2013,p);
+				InttoP(0,p);
+			}
 			else if(discov == 1) { //if open case 
 				if(champ.getTabChamp()[i][j]) { //if bomb
 					InttoP(2011,p);
@@ -161,7 +165,7 @@ public class Server implements Runnable {
 					
 				}
 				else { //if nb case
-					InttoP(2022,p);
+					InttoP(2012,p);
 					InttoP(champ.getTabChampNb()[i][j],p); //send value
 					
 				}
