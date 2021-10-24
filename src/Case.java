@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -23,6 +24,7 @@ public class Case extends JPanel implements MouseListener{
 	private int coordY;
 	private int value;
 	private GuiClient gui;
+	private JLabel label;
 
 	/**
 	 * 
@@ -46,9 +48,26 @@ public class Case extends JPanel implements MouseListener{
 	}
 	
 	public void markFlag(int p) {
-		setBackground(Color.RED);
 		flag = true;
 		System.out.println("Flag from p");
+		label = new JLabel("F - " + p);
+		this.add(label);
+			switch(p) {
+			case 0 :
+				setBackground(Color.RED);
+				break;
+			case 1 :
+				setBackground(Color.GREEN);
+				break;
+			case 2 :
+				setBackground(Color.YELLOW);
+				break;
+			case 3 :
+				setBackground(Color.BLUE);
+				break;
+			default :
+				setBackground(Color.PINK);
+			}
 	}
 	
 	@Override
