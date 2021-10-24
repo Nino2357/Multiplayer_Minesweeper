@@ -35,6 +35,11 @@ public class GuiClient extends JPanel implements ActionListener {
 	    setVisible(true);
 	}
 	
+	public void markFlag(int x,int y, int p) {
+		ca[x][y].markFlag(p);
+		refreshGrid();
+	}
+	
 	public void setDim(int dimX,int dimY)
 	{
 		dimTabX = dimX;
@@ -49,9 +54,7 @@ public class GuiClient extends JPanel implements ActionListener {
 	    ca = new Case[dimTabX][dimTabY];
 	    add(minesPanel, BorderLayout.CENTER); 
 	    reset();
-	    cli.setContentPane(this);
-	    cli.pack();
-	    cli.setVisible(true);
+	    refreshGrid();
 	}
 	
 	public void button() {
@@ -66,6 +69,56 @@ public class GuiClient extends JPanel implements ActionListener {
 	    cli.pack();
 	    cli.setVisible(true);
 	}
+
+	public void newGrid() {
+		ca = new Case[dimTabX][dimTabY];
+		minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
+		minesPanel.removeAll();
+	    setVisible(true);
+	}
+	public void initScore() {
+		score.setText("Score : Start");
+		add(score, BorderLayout.WEST);
+	}
+	
+	public void CasePickGui(int i, int j, int discov) {
+		cli.CasePickCli(i,j,discov);
+		System.out.println("CasePickGui");
+	}
+	public int getCaseColor() {
+		return 0;
+	}
+	public void refreshGrid() {
+	    cli.setContentPane(this);
+	    cli.pack();
+	    cli.setVisible(true);
+	}
+
+	public void reset() {
+		minesPanel.removeAll();
+		for (int i=0 ; i < dimTabX ; i++) {
+			for (int j=0; j < dimTabY; j++) {
+				ca[i][j]= new Case(this,i,j);
+				minesPanel.add(ca[i][j]);
+			}
+		 }
+	} 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == butQuit || e.getSource() == mQuitter) {
+			System.out.println("quit");
+			System.exit(0);
+		}
+		if(e.getSource() == butReset) {
+			System.out.println("reset");
+			reset();
+		}
+	}
+	public void comptFlag() {
+
+	}
+	
 	public void menu() {
 		//Menu
 		JMenuBar menuBar = new JMenuBar();
@@ -159,6 +212,7 @@ public class GuiClient extends JPanel implements ActionListener {
 		mMulti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("multi");
+				
 			}
 		});
 		mMulti.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_C, ActionEvent.ALT_MASK));
@@ -168,48 +222,6 @@ public class GuiClient extends JPanel implements ActionListener {
 	    cli.setContentPane(this);
 	    cli.pack();
 	    cli.setVisible(true);
-	}
-	public void refreshGrid() {
-		ca = new Case[dimTabX][dimTabY];
-		minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
-		minesPanel.removeAll();
-	    setVisible(true);
-	}
-	public void initScore() {
-		score.setText("Score : Start");
-		add(score, BorderLayout.WEST);
-	}
-	
-	public int getCaseValue() {
-		return cli.getCaseValue();
-	}
-	public int getCaseColor() {
-		return 0;
-	}
-
-	public void reset() {
-		minesPanel.removeAll();
-		for (int i=0 ; i < dimTabX ; i++) {
-			for (int j=0; j < dimTabY; j++) {
-				ca[i][j]= new Case(true,0);
-				minesPanel.add(ca[i][j]);
-			}
-		 }
-	} 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource() == butQuit || e.getSource() == mQuitter) {
-			System.out.println("quit");
-			System.exit(0);
-		}
-		if(e.getSource() == butReset) {
-			System.out.println("reset");
-			reset();
-		}
-	}
-	public void comptFlag() {
-
 	}
 }
 

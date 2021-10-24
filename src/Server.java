@@ -105,11 +105,17 @@ public class Server implements Runnable {
 			choix = IntfromP(numThread);
 			switch(choix) {
 				case 0:
-					System.out.println("error");
+					System.out.println("error server");
 				case 1:
 					System.out.println("sortie");
 					play=false;
 					break;
+				case 101:
+					System.out.println("receive 101");
+					int i = IntfromP(numThread);
+					int j = IntfromP(numThread);
+					int discov = IntfromP(numThread);
+					sendCasetoAll(i,j,discov,numThread);
 				default:
 					//System.out.println("rien");
 			}
@@ -124,7 +130,7 @@ public class Server implements Runnable {
 		InttoP(champ.getDimX(),p);
 		InttoP(champ.getDimY(),p);
 		System.out.println("Debut partie joueur : " + p);
-		sendField(p);
+//		sendField(p);
 	}
 	public void sendField(int p) { //to disp result
 		for(int i=0; i<champ.getDimX();i++) {
@@ -134,6 +140,30 @@ public class Server implements Runnable {
 				}
 				else {
 					InttoP(champ.getTabChampNb()[i][j],p);
+				}
+			}
+		}
+	}
+	public void sendCasetoAll(int i,int j,int discov,int numThread) {
+		for(int p=0;p<nbjoueur;p++) {
+			InttoP(201,p);
+			InttoP(i,p);
+			InttoP(j,p);
+			InttoP(numThread,p);
+			if(discov==2) { //if mark flag
+				InttoP(2010,p);
+				InttoP(0,p);
+			}
+			else if(discov == 1) { //if open case 
+				if(champ.getTabChamp()[i][j]) { //if bomb
+					InttoP(2011,p);
+					InttoP(0,p);
+					
+				}
+				else { //if nb case
+					InttoP(2022,p);
+					InttoP(champ.getTabChampNb()[i][j],p); //send value
+					
 				}
 			}
 		}

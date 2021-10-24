@@ -13,7 +13,7 @@ public class Client extends JFrame implements Runnable{
 	private int dimX;
 	private int dimY;
 	private boolean play = true;
-	private int mode = 0;
+	private int mode = 1;
 	
 	public void connectToServer() { 
 		 try {  
@@ -32,6 +32,7 @@ public class Client extends JFrame implements Runnable{
 			
 	
 	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -40,25 +41,40 @@ public class Client extends JFrame implements Runnable{
 		     String msg1Server =in.readUTF();
 		     System.out.println(msg1Server);
 		     newGame();
-		     int choix = -1;
+		     int choix = -3;
 		     while(play) {
 		    	 choix = this.IntfromS();
-		    	 
 		    	 switch(choix) {
-		    	 case 0:
-		    		System.out.println("error"); 
+		    	 case -2:
+		    		System.out.println("error client"); 
 		    	 case 10:
 		     		System.out.println("debut de partie");
+		    	 case 201:
+		    		System.out.println("Receive case");
+		    		this.receiveCase();
+		    		 
 		     	 default:
-		     		 System.out.println("rien");
+		     		 System.out.println(choix);
 		    	 }
-		    	choix = -1;
+		    	choix = -3;
 		     }
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+	public void receiveCase() {
+		int x = IntfromS();
+		int y = IntfromS();
+		int p = IntfromS();
+		int msgR = IntfromS();
+		int valueR = IntfromS();
+		
+		if (msgR==2010) { //flag
+			gui.markFlag(x,y,p);
+		}
+		
 	}
 	public void initClient() {
 		gui = new GuiClient(this);
@@ -86,6 +102,7 @@ public class Client extends JFrame implements Runnable{
 	}
 	public int IntfromS() {
 		try {
+			System.out.println("IntfromS");
 			return in.readInt();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -101,9 +118,12 @@ public class Client extends JFrame implements Runnable{
 		play=false;
 		
 	}
-	public int getCaseValue() {
+	public void CasePickCli(int i, int j, int discov) {
 		InttoS(101);
-		return IntfromS();
+		InttoS(i);
+		InttoS(j);
+		InttoS(discov);
+		System.out.println("Case Pick Cli");
 	}
 	public void startServer() {
 		this.connectToServer();
@@ -111,7 +131,7 @@ public class Client extends JFrame implements Runnable{
 	}
 	Client(){
 		if(mode==0) {
-			MainGame playSolo = new MainGame();
+			//MainGame playSolo = new MainGame();
 		}
 		if(mode==1) {
 			this.connectToServer();

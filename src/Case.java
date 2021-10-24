@@ -19,14 +19,20 @@ public class Case extends JPanel implements MouseListener{
 	private boolean clicked;
 	private boolean flag;
 	private String text;
+	private int coordX;
+	private int coordY;
+	private int value;
+	private GuiClient gui;
 
 	/**
 	 * 
 	 */
 	
-	Case(boolean isMine, int nbMinesAround) {
-		this.isMine = isMine;
-		this.nbMinesAround = nbMinesAround;
+	Case(GuiClient gui, int i, int j) {
+		this.gui=gui;
+		coordX=i;
+		coordY=j;		
+		
 		text = "";
 		flag = false;
 		clicked = false;
@@ -38,6 +44,13 @@ public class Case extends JPanel implements MouseListener{
 	public boolean getFlag() {
 		return this.flag;
 	}
+	
+	public void markFlag(int p) {
+		setBackground(Color.RED);
+		flag = true;
+		System.out.println("Flag from p");
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -62,8 +75,8 @@ public class Case extends JPanel implements MouseListener{
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getButton() == MouseEvent.BUTTON1) {
+			
             System.out.println("Left Click!");
-              
     		clicked = true;
     		if(isMine & !flag) {
     			text="X";
@@ -76,10 +89,12 @@ public class Case extends JPanel implements MouseListener{
     		repaint();
          }
 		 if(e.getButton() == MouseEvent.BUTTON3) {
+			
 			 System.out.println("Right Click!");
 			 if (flag == false & clicked == false) {
-				 setBackground(Color.RED);
-				 flag = true;
+//				 setBackground(Color.RED);
+//				 flag = true;
+				 gui.CasePickGui(coordX, coordY, 2);//send flag to others 
 				 System.out.println(flag);
 			 }
 			 else if (!clicked) {

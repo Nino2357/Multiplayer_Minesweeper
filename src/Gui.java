@@ -39,7 +39,6 @@ public class Gui extends JPanel implements ActionListener {
 	 */
 	Gui(MainGame mainGame) {
 		this.main = mainGame;
-		
 		init();
 		button();
 		menu();
@@ -173,7 +172,6 @@ public class Gui extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("multi");
 				System.exit(0);
-				//cli.start
 			}
 		});
 		mMulti.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_C, ActionEvent.ALT_MASK));
@@ -189,7 +187,7 @@ public class Gui extends JPanel implements ActionListener {
 		minesPanel.removeAll();
 		for (int i=0 ; i < dimTabX ; i++) {
 			for (int j=0; j < dimTabY; j++) {
-				ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
+//				ca[i][j]= new Case(this,i,j);
 				minesPanel.add(ca[i][j]);
 			}
 		 }
@@ -208,7 +206,7 @@ public class Gui extends JPanel implements ActionListener {
 		minesPanel.removeAll();
 		for (int i=0 ; i < dimTabX ; i++) {
 			for (int j=0; j < dimTabY; j++) {
-				ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
+//				ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
 				minesPanel.add(ca[i][j]);
 			}
 		 }
