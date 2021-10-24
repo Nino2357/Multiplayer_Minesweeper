@@ -17,7 +17,7 @@ public class Case extends JPanel implements MouseListener{
 	private static final int HEIGHT_CASE = 50;
 	private boolean isMine;
 	private int nbMinesAround;
-	private boolean clicked;
+	private boolean clicked=false;
 	private boolean flag;
 	private String text;
 	private int coordX;
@@ -25,6 +25,7 @@ public class Case extends JPanel implements MouseListener{
 	private int value;
 	private GuiClient gui;
 	private JLabel label;
+	private boolean discover = false;
 
 	/**
 	 * 
@@ -50,7 +51,7 @@ public class Case extends JPanel implements MouseListener{
 	public void markFlag(int p) {
 		flag = true;
 		System.out.println("Flag from p");
-		label = new JLabel("F - " + p);
+		label = new JLabel("F");
 		this.add(label);
 			switch(p) {
 			case 0 :
@@ -76,6 +77,53 @@ public class Case extends JPanel implements MouseListener{
 		setBackground(Color.GRAY);
 	}
 	
+	public void markMine(int p) {
+		isMine=true;
+		clicked=true;
+		System.out.println("Mine from p");
+		label = new JLabel("X");
+		this.add(label);
+			switch(p) {
+			case 0 :
+				setBackground(Color.RED);
+				break;
+			case 1 :
+				setBackground(Color.GREEN);
+				break;
+			case 2 :
+				setBackground(Color.YELLOW);
+				break;
+			case 3 :
+				setBackground(Color.BLUE);
+				break;
+			default :
+				setBackground(Color.PINK);
+			}
+	}
+	public void markNum(int p,int value) {
+		isMine=false;
+		clicked=true;
+		System.out.println("Nume from p");
+		label = new JLabel(""+ value);
+		this.add(label);
+			switch(p) {
+			case 0 :
+				setBackground(Color.RED);
+				break;
+			case 1 :
+				setBackground(Color.GREEN);
+				break;
+			case 2 :
+				setBackground(Color.YELLOW);
+				break;
+			case 3 :
+				setBackground(Color.BLUE);
+				break;
+			default :
+				setBackground(Color.PINK);
+			}
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -87,28 +135,20 @@ public class Case extends JPanel implements MouseListener{
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getButton() == MouseEvent.BUTTON1) {
-			
             System.out.println("Left Click!");
-    		clicked = true;
-    		if(isMine & !flag) {
-    			text="X";
-    			setBackground(Color.CYAN);
+    		if(clicked==false & flag==false) { //send request num
+    			gui.CasePickGui(coordX, coordY, 1);//send request to server 
+    			
     		}
-    		else if (!flag) {
-    			text=String.valueOf(nbMinesAround);
-    			setBackground(Color.CYAN);
-    		}
-    		repaint();
-         }
+        }
 		 if(e.getButton() == MouseEvent.BUTTON3) {
 			
 			 System.out.println("Right Click!");
-			 if (flag == false) { //put flag
+			 if (flag==false & discover==false) { //put flag
 				 gui.CasePickGui(coordX, coordY, 2);//send flag to others 
 			 }
-			 else { //remove flag
+			 else if (discover == false){ //remove flag
 				 gui.CasePickGui(coordX, coordY, 3);
-				 flag = false;
 			 }
 			 
 	     }

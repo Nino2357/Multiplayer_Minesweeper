@@ -44,6 +44,16 @@ public class GuiClient extends JPanel implements ActionListener {
 		refreshGrid();
 	}
 	
+	public void markMine(int x, int y, int p) {
+		ca[x][y].markMine(p);
+		refreshGrid();
+		
+	}
+	public void markNum(int x, int y, int p, int value) {
+		ca[x][y].markNum(p,value);
+		refreshGrid();
+	}
+	
 	public void setDim(int dimX,int dimY)
 	{
 		dimTabX = dimX;
@@ -227,6 +237,8 @@ public class GuiClient extends JPanel implements ActionListener {
 	    cli.pack();
 	    cli.setVisible(true);
 	}
+
+
 
 
 }

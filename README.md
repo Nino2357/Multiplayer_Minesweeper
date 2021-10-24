@@ -29,3 +29,11 @@ Client -> Server :
 0 : error
 1 : quit
 101 : get case value
+
+
+To do :
+- score (-10 bomb)
+- image
+- reset button
+- change lvl
+- solo mode
