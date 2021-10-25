@@ -9,6 +9,7 @@ public class Server implements Runnable {
 	private ArrayList<Socket> tabSocket;
 	private ArrayList<DataInputStream> entree;
 	private ArrayList<DataOutputStream> sortie;
+	private ArrayList<Integer> score;
 	private int nbjoueur;
 	private ServerSocket gestSock;
 	private int numJoueur;
@@ -21,6 +22,8 @@ public class Server implements Runnable {
 		tabThread = new ArrayList<Thread>();
 		entree = new ArrayList<DataInputStream>();
 		sortie = new ArrayList<DataOutputStream>();
+		score = new ArrayList<Integer>();
+		
 		try {
 			nbjoueur=0;
 			gestSock = new ServerSocket(10000);
@@ -30,6 +33,7 @@ public class Server implements Runnable {
 				tabSocket.add(gs);
 				entree.add(new DataInputStream(tabSocket.get(nbjoueur).getInputStream()));
 				sortie.add(new DataOutputStream(tabSocket.get(nbjoueur).getOutputStream()));
+				score.add(0);
 				tabThread.add(new Thread(this));
 //				System.out.println("after accept "+nbjoueur);
 				numJoueur=nbjoueur;
@@ -116,11 +120,15 @@ public class Server implements Runnable {
 					int j = IntfromP(numThread);
 					int discov = IntfromP(numThread);
 					sendCasetoAll(i,j,discov,numThread);
+					break;
+				case 102:
+					System.out.println("102");
+					sendScoretoAll();
+					break;
 				default:
 					//System.out.println("rien");
 			}
-			choix=-1;
-				
+			choix=-1;	
 			
 		}
 		
@@ -162,13 +170,25 @@ public class Server implements Runnable {
 				if(champ.getTabChamp()[i][j]) { //if bomb
 					InttoP(2011,p);
 					InttoP(0,p);
+					score.set(numThread,score.get(numThread)-10); //The player touch a bomb (-10)
 					
 				}
 				else { //if nb case
 					InttoP(2012,p);
 					InttoP(champ.getTabChampNb()[i][j],p); //send value
+					score.set(numThread,score.get(numThread)+1);
 					
 				}
+			}
+		}
+	}
+	public void sendScoretoAll() {
+		for(int p=0;p<nbjoueur;p++) {
+			InttoP(202,p);
+			InttoP(nbjoueur,p); //to configure the client loop
+			for(int scoreof=0;scoreof<nbjoueur;scoreof++) {
+				InttoP(scoreof,p);
+				InttoP(score.get(scoreof),p);
 			}
 		}
 	}

@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -52,7 +53,11 @@ public class Client extends JFrame implements Runnable{
 		    	 case 201:
 		    		System.out.println("Receive case");
 		    		this.receiveCase();
-		    		 
+		    		break;
+		    	 case 202:
+		    		 System.out.println("Receive score" + choix);
+		    		 this.receiveScore();
+		    		 break;
 		     	 default:
 		     		 System.out.println(choix);
 		    	 }
@@ -83,7 +88,16 @@ public class Client extends JFrame implements Runnable{
 		if (msgR==2012) {
 			gui.markNum(x,y,p,valueR);
 		}
-		 
+	}
+	public void receiveScore() {
+		int numberOfPlayer= IntfromS();
+		ArrayList<Integer> scoreList= new ArrayList<Integer>();
+		for(int p=0;p<numberOfPlayer;p++) {
+			int player = IntfromS();
+			int score = IntfromS();
+			scoreList.add(score);
+		}
+		gui.receiveScore(numberOfPlayer,scoreList);
 	}
 	public void initClient() {
 		gui = new GuiClient(this);
@@ -111,7 +125,6 @@ public class Client extends JFrame implements Runnable{
 	}
 	public int IntfromS() {
 		try {
-			System.out.println("IntfromS");
 			return in.readInt();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -133,6 +146,9 @@ public class Client extends JFrame implements Runnable{
 		InttoS(j);
 		InttoS(discov);
 		System.out.println("Case Pick Cli");
+	}
+	public void scoreAskCli() {
+		InttoS(102);
 	}
 	public void startServer() {
 		this.connectToServer();

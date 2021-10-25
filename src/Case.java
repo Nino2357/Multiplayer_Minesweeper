@@ -152,6 +152,7 @@ public class Case extends JPanel implements MouseListener{
 			 }
 			 
 	     }
+		 gui.scoreAskGui(); //refresh score of players
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {

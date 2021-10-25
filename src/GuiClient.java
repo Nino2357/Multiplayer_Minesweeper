@@ -3,6 +3,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -21,17 +23,15 @@ public class GuiClient extends JPanel implements ActionListener {
 	private Client cli;
 	private JPanel minesPanel;
 	private JMenuItem mQuitter;
-	JLabel score = new JLabel();
+	private JPanel scorePanel;
 	/**
 	 * 
 	 */
 	GuiClient(Client cli) {
 		this.cli = cli;
-		init();
 		button();
+		init();
 		menu();
-//		initScore();
-	    //setSize(1500,1000);
 	    setVisible(true);
 	}
 	
@@ -53,6 +53,18 @@ public class GuiClient extends JPanel implements ActionListener {
 		ca[x][y].markNum(p,value);
 		refreshGrid();
 	}
+	public void receiveScore(int numberOfPlayer,ArrayList<Integer> scoreList) {
+		scorePanel.removeAll();
+		scorePanel.add(butQuit);
+		scorePanel.add(butReset);
+		scorePanel.add(new JLabel("Score :"));
+		for(int scoreOf=0;scoreOf<numberOfPlayer;scoreOf++) {
+			scorePanel.add(new JLabel("Score of player "+scoreOf+" : "+scoreList.get(scoreOf)/numberOfPlayer)); //to balance server score
+			System.out.println("Score of player "+scoreOf+" : "+scoreList.get(scoreOf)/numberOfPlayer);
+		}
+		System.out.println("Receive Score");
+//		refreshGrid();
+	}
 	
 	public void setDim(int dimX,int dimY)
 	{
@@ -61,23 +73,32 @@ public class GuiClient extends JPanel implements ActionListener {
 	}
 	
 	public void init() {
+		this.setLayout(new GridLayout(2,1));
 	    minesPanel = new JPanel();
 	    minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
 	    minesPanel.setVisible(true);
 	    minesPanel.setSize(800,500);
 	    ca = new Case[dimTabX][dimTabY];
-	    add(minesPanel, BorderLayout.CENTER); 
+	    add(minesPanel); 
+	    scorePanel = new JPanel();
+	    scorePanel.setLayout(new GridLayout(9,1));
+	    scorePanel.setVisible(true);
+	    scorePanel.setSize(500,300);
+	    add(scorePanel);
+	    scorePanel.add(butQuit);
+	    scorePanel.add(butReset);
+	    scorePanel.add(new JLabel("Score :"));
+	    
 	    reset();
 	    refreshGrid();
 	}
 	
 	public void button() {
 		butQuit = new JButton("Quit");
-		add(butQuit, BorderLayout.SOUTH);
 		butQuit.addActionListener(this);
 		
 		butReset = new JButton("Reset");
-		add(butReset, BorderLayout.SOUTH);
+		
 		butReset.addActionListener(this);
 	    cli.setContentPane(this);
 	    cli.pack();
@@ -89,18 +110,13 @@ public class GuiClient extends JPanel implements ActionListener {
 		minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
 		minesPanel.removeAll();
 	    setVisible(true);
-	}
-	public void initScore() {
-		score.setText("Score : Start");
-		add(score, BorderLayout.WEST);
-	}
-	
+	}	
 	public void CasePickGui(int i, int j, int discov) {
 		cli.CasePickCli(i,j,discov);
 		System.out.println("CasePickGui");
 	}
-	public int getCaseColor() {
-		return 0;
+	public void scoreAskGui() {
+		cli.scoreAskCli();
 	}
 	public void refreshGrid() {
 	    cli.setContentPane(this);
@@ -128,9 +144,6 @@ public class GuiClient extends JPanel implements ActionListener {
 			System.out.println("reset");
 			reset();
 		}
-	}
-	public void comptFlag() {
-
 	}
 	
 	public void menu() {

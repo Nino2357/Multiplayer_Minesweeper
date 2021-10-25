@@ -19,7 +19,7 @@ Server -> Client :
 	2010 : flag
 	2011 : case num
 	2012 : case mine
-
+202 : sendScore
 
 
 
@@ -29,6 +29,7 @@ Client -> Server :
 0 : error
 1 : quit
 101 : get case value
+102 : get score
 
 
 To do :
