@@ -133,6 +133,32 @@ public class GuiSolo extends JPanel implements ActionListener {
 		});
 		mQuitter.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_Q, ActionEvent.ALT_MASK));
 		
+		JMenu menuMode = new JMenu("Mode");
+		menuBar.add(menuMode);
+		
+		//Solo
+		JMenuItem mSolo = new JMenuItem("Solo");
+		menuMode.add(mSolo);
+		mSolo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("solo");
+			}
+		});
+		mSolo.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_S, ActionEvent.ALT_MASK));
+				
+		//Mutli
+		JMenuItem mMulti = new JMenuItem("Multiplayer");
+		menuMode.add(mMulti);
+		mMulti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("multi");
+				new Client();	
+			}
+		});
+		mMulti.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_C, ActionEvent.ALT_MASK));
+	
+		
+		
 		main.setJMenuBar(menuBar);
 	}
 	public void refreshGrid() {

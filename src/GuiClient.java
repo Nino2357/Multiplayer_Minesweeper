@@ -230,6 +230,7 @@ public class GuiClient extends JPanel implements ActionListener {
 		mSolo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("solo");
+				new MainSolo();
 			}
 		});
 		mSolo.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_S, ActionEvent.ALT_MASK));
