@@ -7,17 +7,17 @@ import javax.swing.JPanel;
  *
  */
 
-public class Main extends JFrame {
+public class MainSolo extends JFrame {
 	
-	private Gui gui;
-	private Champ ch;
+	private GuiSolo gui;
+	private ChampSolo ch;
 
-	Main() {
+	MainSolo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setTitle("Demineur");
-		ch= new Champ(Level.EASY);
+		ch= new ChampSolo(Level.EASY);
 		ch.placeMines(Level.EASY);
-		gui = new Gui(this);
+		gui = new GuiSolo(this);
 		
 		setContentPane(gui);
 		pack();
@@ -28,9 +28,9 @@ public class Main extends JFrame {
 	 * 
 	 */
 	public static void main(String[] args) {
-		new Main();
+		new MainSolo();
 	}
-	Champ getChamp() {
+	ChampSolo getChamp() {
 		return ch;
 	}
 }

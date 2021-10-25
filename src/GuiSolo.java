@@ -16,9 +16,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-public class Gui extends JPanel implements ActionListener {
+public class GuiSolo extends JPanel implements ActionListener {
 	
-	private Main main;
+	private MainSolo main;
 	private JButton butQuit;
 	private JButton butReset;
 	private JMenuItem mEasy;
@@ -26,15 +26,15 @@ public class Gui extends JPanel implements ActionListener {
 	private JMenuItem mHard;
 	private int dimTabX;
 	private int dimTabY;
-	private Champ champ;
+	private ChampSolo champ;
 	private JPanel minesPanel;
-	private Case ca[][];
+	private CaseSolo ca[][];
 	private JMenuItem mQuitter;
 	private Level currentLevel;
 	/**
 	 * 
 	 */
-	Gui(Main main) {
+	GuiSolo(MainSolo main) {
 		this.main = main;
 		
 		init();
@@ -56,7 +56,7 @@ public class Gui extends JPanel implements ActionListener {
 		dimTabX = champ.getDimX();
 		dimTabY = champ.getDimY();
 	
-		ca = new Case[dimTabX][dimTabY];
+		ca = new CaseSolo[dimTabX][dimTabY];
 		
 	    minesPanel = new JPanel();
 	    minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
@@ -138,12 +138,12 @@ public class Gui extends JPanel implements ActionListener {
 	public void refreshGrid() {
 		dimTabX = champ.getDimX();
 		dimTabY = champ.getDimY();
-		ca = new Case[dimTabX][dimTabY];
+		ca = new CaseSolo[dimTabX][dimTabY];
 		minesPanel.setLayout(new GridLayout(dimTabX,dimTabY));
 		minesPanel.removeAll();
 		for (int i=0 ; i < dimTabX ; i++) {
 			for (int j=0; j < dimTabY; j++) {
-				ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
+				ca[i][j]= new CaseSolo(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
 				minesPanel.add(ca[i][j]);
 			}
 		 }
@@ -162,7 +162,7 @@ public class Gui extends JPanel implements ActionListener {
 		minesPanel.removeAll();
 		for (int i=0 ; i < dimTabX ; i++) {
 			for (int j=0; j < dimTabY; j++) {
-				ca[i][j]= new Case(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
+				ca[i][j]= new CaseSolo(champ.getTabChamp()[i][j],champ.getTabChampNb()[i][j]);
 				minesPanel.add(ca[i][j]);
 			}
 		 }

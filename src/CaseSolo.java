@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  * @author ninod
  *
  */
-public class Case extends JPanel implements MouseListener{
+public class CaseSolo extends JPanel implements MouseListener{
 	private static final int WIDTH_CASE = 50;
 	private static final int HEIGHT_CASE = 50;
 	private boolean isMine;
@@ -24,7 +24,7 @@ public class Case extends JPanel implements MouseListener{
 	 * 
 	 */
 	
-	Case(boolean isMine, int nbMinesAround) {
+	CaseSolo(boolean isMine, int nbMinesAround) {
 		this.isMine = isMine;
 		this.nbMinesAround = nbMinesAround;
 		text = "";
@@ -47,6 +47,20 @@ public class Case extends JPanel implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+	
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1) {
             System.out.println("Left Click!");
             
@@ -73,21 +87,6 @@ public class Case extends JPanel implements MouseListener{
 			 }
 			 
 	     }
-		
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {

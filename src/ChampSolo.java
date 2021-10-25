@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Champ {
+public class ChampSolo {
 
 	private int [] levelSizes = {10,20,30};
 	private int [] levelNbMines = {10,40,90};
@@ -10,7 +10,7 @@ public class Champ {
 	
 	Random alea = new Random() ;
 	
-	public Champ(Level level) {
+	public ChampSolo(Level level) {
 		tabChamp = new boolean [levelSizes[level.ordinal()]] [levelSizes[level.ordinal()]];
 		tabChampNb= new int [levelSizes[level.ordinal()]] [levelSizes[level.ordinal()]];
 	}
