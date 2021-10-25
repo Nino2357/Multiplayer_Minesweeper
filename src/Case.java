@@ -44,8 +44,9 @@ public class Case extends JPanel implements MouseListener{
 		coordX=i;
 		coordY=j;		
 //		try {
-//			image = ImageIO.read(new File("./image/mine.png"));
+//			image = ImageIO.read(new File("./src/mine.png"));
 //		} catch (IOException e) {
+//			System.out.println("pb read");
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
