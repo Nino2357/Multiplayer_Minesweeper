@@ -81,15 +81,23 @@ public class GuiClient extends JPanel implements ActionListener {
 	    ca = new Case[dimTabX][dimTabY];
 	    add(minesPanel); 
 	    scorePanel = new JPanel();
-	    scorePanel.setLayout(new GridLayout(9,1));
+	    scorePanel.setLayout(new GridLayout(8,1));
 	    scorePanel.setVisible(true);
 	    scorePanel.setSize(500,300);
 	    add(scorePanel);
+	   
+	    
+		for (int i=0 ; i < dimTabX ; i++) {
+			for (int j=0; j < dimTabY; j++) {
+				ca[i][j]= new Case(this,i,j);
+				minesPanel.add(ca[i][j]);
+			}
+		 }
 	    scorePanel.add(butQuit);
 	    scorePanel.add(butReset);
 	    scorePanel.add(new JLabel("Score :"));
 	    
-	    reset();
+	    
 	    refreshGrid();
 	}
 	
@@ -125,13 +133,6 @@ public class GuiClient extends JPanel implements ActionListener {
 	}
 
 	public void reset() {
-		minesPanel.removeAll();
-		for (int i=0 ; i < dimTabX ; i++) {
-			for (int j=0; j < dimTabY; j++) {
-				ca[i][j]= new Case(this,i,j);
-				minesPanel.add(ca[i][j]);
-			}
-		 }
 	} 
 	@Override
 	public void actionPerformed(ActionEvent e) {

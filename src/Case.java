@@ -1,9 +1,16 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,7 +33,8 @@ public class Case extends JPanel implements MouseListener{
 	private GuiClient gui;
 	private JLabel label;
 	private boolean discover = false;
-
+//	private Image mine;
+//	private BufferedImage image;
 	/**
 	 * 
 	 */
@@ -35,7 +43,12 @@ public class Case extends JPanel implements MouseListener{
 		this.gui=gui;
 		coordX=i;
 		coordY=j;		
-		
+//		try {
+//			image = ImageIO.read(new File("./image/mine.png"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		text = "";
 		flag = false;
 		clicked = false;
@@ -82,6 +95,7 @@ public class Case extends JPanel implements MouseListener{
 		clicked=true;
 		System.out.println("Mine from p");
 		label = new JLabel("X");
+//	    label = new JLabel(new ImageIcon(image));
 		this.add(label);
 			switch(p) {
 			case 0 :
@@ -127,6 +141,9 @@ public class Case extends JPanel implements MouseListener{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+//		if (image != null) {
+//			g.drawImage(image, 0, 0, null);
+//		}
 		g.drawString(String.valueOf(text), getWidth()/2, getHeight()/2);
 		g.drawRect(0,0, getWidth(), getHeight());
 	}
