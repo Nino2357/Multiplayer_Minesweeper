@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 /**
- * 
+ * Case interface of single player game
  * @author ninod
  *
  */

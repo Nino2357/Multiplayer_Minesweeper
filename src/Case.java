@@ -15,9 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * 
+ * Define case interface=
  * @author ninod
- *
+ *extends JPanel
  */
 public class Case extends JPanel implements MouseListener{
 	private static final int WIDTH_CASE = 50;
@@ -33,23 +33,17 @@ public class Case extends JPanel implements MouseListener{
 	private GuiClient gui;
 	private JLabel label;
 	private boolean discover = false;
-//	private Image mine;
-//	private BufferedImage image;
-	/**
-	 * 
-	 */
-	
+
+/**
+ * Constructor	
+ * @param gui
+ * @param i
+ * @param j
+ */
 	Case(GuiClient gui, int i, int j) {
 		this.gui=gui;
 		coordX=i;
 		coordY=j;		
-//		try {
-//			image = ImageIO.read(new File("./src/mine.png"));
-//		} catch (IOException e) {
-//			System.out.println("pb read");
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		text = "";
 		flag = false;
 		clicked = false;
@@ -58,10 +52,7 @@ public class Case extends JPanel implements MouseListener{
 		addMouseListener(this);
 	
 	}
-	public boolean getFlag() {
-		return this.flag;
-	}
-	
+
 	public void markFlag(int p) {
 		flag = true;
 		System.out.println("Flag from p");
@@ -142,9 +133,6 @@ public class Case extends JPanel implements MouseListener{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-//		if (image != null) {
-//			g.drawImage(image, 0, 0, null);
-//		}
 		g.drawString(String.valueOf(text), getWidth()/2, getHeight()/2);
 		g.drawRect(0,0, getWidth(), getHeight());
 	}

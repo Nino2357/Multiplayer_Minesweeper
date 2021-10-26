@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import java.io.*;
-
+/**
+ * Client class, create a player who join a game on a a server (default localhost:10000)
+ * @author ninod
+ *
+ */
 public class Client extends JFrame implements Runnable{
 	private Thread th;
 	private Socket sock;

@@ -1,5 +1,9 @@
 import java.util.*;
-
+/**
+ * Create a minesweeper field
+ * @author ninod
+ *
+ */
 public class Champ {
 
 	private int [] levelSizes = {10,20,30};

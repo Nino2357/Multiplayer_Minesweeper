@@ -13,6 +13,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+/**
+ * Create the graphical interface of a client
+ * @author ninod
+ *	extends JPanel
+ *	implements ActionListener
+ */
 public class GuiClient extends JPanel implements ActionListener {
 	
 	private JButton butQuit;
@@ -24,9 +30,14 @@ public class GuiClient extends JPanel implements ActionListener {
 	private JPanel minesPanel;
 	private JMenuItem mQuitter;
 	private JPanel scorePanel;
-	/**
-	 * 
-	 */
+/**
+ * Constructor
+ * Create basic interface for client
+ * @see button
+ * @see init
+ * @see menu
+ * @param cli
+ */
 	GuiClient(Client cli) {
 		this.cli = cli;
 		button();

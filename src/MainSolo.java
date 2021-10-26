@@ -3,10 +3,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * 
+ * Start the partie (for single player game)
+ * @author ninod
  *
  */
-
 public class MainSolo extends JFrame {
 	
 	private GuiSolo gui;

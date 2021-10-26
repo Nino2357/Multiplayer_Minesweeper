@@ -1,5 +1,9 @@
 import java.util.*;
-
+/**
+ * Create a minesweeper field (designed for game in solo mode)
+ * @author ninod
+ *
+ */
 public class ChampSolo {
 
 	private int [] levelSizes = {10,20,30};

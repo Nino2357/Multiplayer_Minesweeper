@@ -16,6 +16,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+/**
+ * Create an interface for a player (local game)
+ * @author ninod
+ *
+ */
 public class GuiSolo extends JPanel implements ActionListener {
 	
 	private MainSolo main;
