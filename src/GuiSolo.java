@@ -212,48 +212,7 @@ public class GuiSolo extends JPanel implements ActionListener {
 			reset(currentLevel);
 		}
 	}
-	public void comptFlag() {
-		champ.setScore(0);
-		for (int i=0 ; i < dimTabX ; i++) {
-			for (int j=0; j < dimTabY; j++) {
-				if (ca[i][j].getFlag() == true);
-					champ.add1Flag();
-			}
-		 }
-		
-	}
 }
 
 
 
-
-/*
-public void Reset2() {
-	champ.videMines();
-	champ.placeMines(Level.EASY);
-	minesPanel.removeAll();
-	for (int i=0 ; i < dimTabX ; i++) {
-		for (int j=0; j < dimTabY; j++) {
-			if (champ.getTabChamp()[i][j]==true) {
-				minesPanel.add(new JLabel((Icon) new ImageIcon(new ImageIcon(getClass().getResource("/mine.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))));
-			}
-			else {
-				minesPanel.add(new JLabel((Icon) new ImageIcon(new ImageIcon(getClass().getResource("/icon.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))));
-			}		
-		}
-	 }
-    main.setContentPane(this);
-    main.setVisible(true);
-}*/
-
-
-/*
-//NivEasy
-JMenuItem mNivEasy = new JMenuItem("Easy",KeyEvent.VK_E);
-menuPartie.add(mQuitter);
-mQuitter.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("quit");
-		System.exit(0);
-		}
-});*/
