@@ -208,10 +208,10 @@ public class Server implements Runnable {
 	 * 		coord y champ
 	 * @param discov
 	 * 		statut reçu 
-	 * 			0 nothing
-	 * 			1 open case
-	 * 			2 mark flag
-	 * 			3 remove flag
+	 * 			<li>0 nothing</li>
+	 * 			<li>1 open case</li>
+	 * 			<li>2 mark flag</li>
+	 * 			<li>3 remove flag</li>
 	 * @param numThread
 	 * 		id du joueur ( = numThread)
 	 * 

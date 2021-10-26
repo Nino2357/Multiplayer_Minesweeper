@@ -20,10 +20,14 @@ public class CaseSolo extends JPanel implements MouseListener{
 	private boolean flag;
 	private String text;
 
-	/**
-	 * 
-	 */
-	
+
+/**
+ * 	
+ * @param isMine
+ * 	The case is a mine
+ * @param nbMinesAround
+ * 	The value
+ */
 	CaseSolo(boolean isMine, int nbMinesAround) {
 		this.isMine = isMine;
 		this.nbMinesAround = nbMinesAround;
@@ -35,9 +39,10 @@ public class CaseSolo extends JPanel implements MouseListener{
 		addMouseListener(this);
 	
 	}
-	public boolean getFlag() {
-		return this.flag;
-	}
+	/**
+	 * Create Rect 
+	 * Create border 
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -59,6 +64,13 @@ public class CaseSolo extends JPanel implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	/**
+	 * When a player click on a case
+	 * 
+	 * Color case according to the click
+	 * Left click : open case
+	 * Right click : mark/remove flag
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1) {
