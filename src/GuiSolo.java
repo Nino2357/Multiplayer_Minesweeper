@@ -90,6 +90,7 @@ public class GuiSolo extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("EASY");
 				champ.changeLvl(Level.EASY);
+				main.changeFileLevel("1");
 				refreshGrid();
 				reset(Level.EASY);
 			}
@@ -102,6 +103,7 @@ public class GuiSolo extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("MEDIUM");
 				champ.changeLvl(Level.MEDIUM);
+				main.changeFileLevel("2");
 				refreshGrid();
 				reset(Level.MEDIUM);
 			}
@@ -114,6 +116,7 @@ public class GuiSolo extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("HARD");
 				champ.changeLvl(Level.HARD);
+				main.changeFileLevel("3");
 				refreshGrid();
 				reset(Level.HARD);
 			}
