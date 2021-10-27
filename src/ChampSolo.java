@@ -7,7 +7,7 @@ import java.util.*;
 public class ChampSolo {
 
 	private int [] levelSizes = {10,20,30};
-	private int [] levelNbMines = {10,40,90};
+	private int [] levelNbMines = {20,80,180};
 	private boolean[][] tabChamp;
 	private int[][] tabChampNb;
 	private int score;
