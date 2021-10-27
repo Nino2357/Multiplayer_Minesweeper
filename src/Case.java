@@ -56,20 +56,20 @@ public class Case extends JPanel implements MouseListener{
 	public void markFlag(int p) {
 		flag = true;
 		System.out.println("Flag from p");
-		label = new JLabel("F");
+		label = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/flag.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		this.add(label);
 			switch(p) {
 			case 0 :
-				setBackground(Color.RED);
+				setBackground(Color.ORANGE);
 				break;
 			case 1 :
 				setBackground(Color.GREEN);
 				break;
 			case 2 :
-				setBackground(Color.YELLOW);
+				setBackground(Color.BLUE);
 				break;
 			case 3 :
-				setBackground(Color.BLUE);
+				setBackground(Color.YELLOW);
 				break;
 			default :
 				setBackground(Color.PINK);
@@ -86,25 +86,24 @@ public class Case extends JPanel implements MouseListener{
 		isMine=true;
 		clicked=true;
 		System.out.println("Mine from p");
-		label = new JLabel("X");
-//	    label = new JLabel(new ImageIcon(image));
+		label = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/mine.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		this.add(label);
-			switch(p) {
-			case 0 :
-				setBackground(Color.RED);
-				break;
-			case 1 :
-				setBackground(Color.GREEN);
-				break;
-			case 2 :
-				setBackground(Color.YELLOW);
-				break;
-			case 3 :
-				setBackground(Color.BLUE);
-				break;
-			default :
-				setBackground(Color.PINK);
-			}
+		switch(p) {
+		case 0 :
+			setBackground(Color.ORANGE);
+			break;
+		case 1 :
+			setBackground(Color.GREEN);
+			break;
+		case 2 :
+			setBackground(Color.BLUE);
+			break;
+		case 3 :
+			setBackground(Color.YELLOW);
+			break;
+		default :
+			setBackground(Color.PINK);
+		}
 	}
 	public void markNum(int p,int value) {
 		isMine=false;
@@ -112,22 +111,22 @@ public class Case extends JPanel implements MouseListener{
 		System.out.println("Nume from p");
 		label = new JLabel(""+ value);
 		this.add(label);
-			switch(p) {
-			case 0 :
-				setBackground(Color.RED);
-				break;
-			case 1 :
-				setBackground(Color.GREEN);
-				break;
-			case 2 :
-				setBackground(Color.YELLOW);
-				break;
-			case 3 :
-				setBackground(Color.BLUE);
-				break;
-			default :
-				setBackground(Color.PINK);
-			}
+		switch(p) {
+		case 0 :
+			setBackground(Color.ORANGE);
+			break;
+		case 1 :
+			setBackground(Color.GREEN);
+			break;
+		case 2 :
+			setBackground(Color.BLUE);
+			break;
+		case 3 :
+			setBackground(Color.YELLOW);
+			break;
+		default :
+			setBackground(Color.PINK);
+		}
 	}
 	
 	@Override
