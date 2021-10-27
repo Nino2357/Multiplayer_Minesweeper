@@ -45,13 +45,6 @@ public class GuiSolo extends JPanel implements ActionListener {
 		init();
 		button();
 		menu();
-		score();
-		
-		
-		
-		
-		
-	    //setSize(1500,1000);
 	    setVisible(true);
 	}
 	
@@ -161,8 +154,6 @@ public class GuiSolo extends JPanel implements ActionListener {
 			}
 		});
 		mMulti.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_C, ActionEvent.ALT_MASK));
-	
-		
 		
 		main.setJMenuBar(menuBar);
 	}
@@ -181,11 +172,7 @@ public class GuiSolo extends JPanel implements ActionListener {
 
 	    setVisible(true);
 	}
-	public void score() {
-		JLabel score = new JLabel();
-		score.setText("Score :" + champ.getScore());
-		add(score, BorderLayout.WEST);
-	}
+
 	public void reset(Level level) {
 		champ.videMines();
 		champ.placeMines(level);

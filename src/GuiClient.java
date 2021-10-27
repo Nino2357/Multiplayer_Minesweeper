@@ -67,14 +67,14 @@ public class GuiClient extends JPanel implements ActionListener {
 	public void receiveScore(int numberOfPlayer,ArrayList<Integer> scoreList) {
 		scorePanel.removeAll();
 		scorePanel.add(butQuit);
-		scorePanel.add(butReset);
+//		scorePanel.add(butReset);
 		scorePanel.add(new JLabel("Score :"));
 		for(int scoreOf=0;scoreOf<numberOfPlayer;scoreOf++) {
 			scorePanel.add(new JLabel("Score of player "+scoreOf+" : "+scoreList.get(scoreOf)/numberOfPlayer)); //to balance server score
 			System.out.println("Score of player "+scoreOf+" : "+scoreList.get(scoreOf)/numberOfPlayer);
 		}
 		System.out.println("Receive Score");
-//		refreshGrid();
+		refreshGrid();
 	}
 	
 	public void setDim(int dimX,int dimY)
@@ -105,7 +105,7 @@ public class GuiClient extends JPanel implements ActionListener {
 			}
 		 }
 	    scorePanel.add(butQuit);
-	    scorePanel.add(butReset);
+//	    scorePanel.add(butReset);
 	    scorePanel.add(new JLabel("Score :"));
 	    
 	    
@@ -154,7 +154,6 @@ public class GuiClient extends JPanel implements ActionListener {
 		}
 		if(e.getSource() == butReset) {
 			System.out.println("reset");
-			reset();
 		}
 	}
 	
@@ -185,7 +184,6 @@ public class GuiClient extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("MEDIUM");
 				refreshGrid();
-				reset();
 			}
 		});
 		mMedium.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_M, ActionEvent.ALT_MASK));
@@ -196,7 +194,6 @@ public class GuiClient extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("HARD");
 				refreshGrid();
-				reset();
 			}
 		});
 		mHard.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_H, ActionEvent.ALT_MASK));
