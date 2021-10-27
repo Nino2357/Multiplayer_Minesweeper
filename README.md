@@ -1,7 +1,22 @@
 # Multiplayer_Minesweeper
 
+---
+
+## Presentation
+
+Multiplayer minesweeper game. 
+
+This game is developed in java. It proposes to play the Minesweeper in 2 modes (solo, multiplayer).
+The solo mode offers a choice of levels. 
+You just have to make a left click to discover a square and a right click to add or remove the flags.
+
+The multiplayer mode offers to play with several players in easy level. 
+Players can play simultaneously. Each player is assigned a color and the cells are colored with the player's color. 
+Scores are counted: discovering a cell brings 1 point and discovering a bomb makes you lose 10 points.
+The goal is to get as many points as possible.
 
 
+---
 
 #### Play
 
@@ -28,9 +43,22 @@ Features :
 - put/remove flag
 - different color case for each player 
 
+
 ##### Switch GameMode
 
 MenuBar -> Mode -> Solo / Multi
+
+---
+
+#### Technical Choice
+
+Using swing library for graphical interface.
+
+Using socket for Serveur/Client communication
+
+Using thread for waiting message from Server/client
+
+---
 
 #### Communication codes
 
